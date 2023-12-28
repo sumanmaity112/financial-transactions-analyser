@@ -1,14 +1,14 @@
 fileignoreconfig:
 - filename: package-lock.json
-  checksum: 5893d1a1e64e1f4ed1727b052edefccf781bd5ea46b5840919c18631537cd2e2
+  checksum: fe28a383633b58228c6be66468aefd904c86b1632e4571336fedacf6d4265528
 - filename: src/components/AnalyzeTransactions.vue
-  checksum: cf7b30ba333609e344278f44d3464644af286ac899a73df71536a192e7c30547
+  checksum: b42582eaede6558d110eb7faba69563d88c5797a40df5975abbce87ad762996c
 - filename: src/components/LineChart.vue
-  checksum: a842825d652c4e6518bfaf331989633b2a33895e6c130e504173a24aa789ea2b
+  checksum: ebb255af9cec6f270c7be52eb7c9cb6c191ef87bb8b76113a19b1429ed335213
 - filename: src/components/PieChart.vue
   checksum: 907a95e90ed5366ea1db7edf05ec418c6352ca32ad1a48177eb4889152112ada
 - filename: src/components/TransactionsDashboard.vue
-  checksum: 6e33f5e9033a210ee2fff13f9182ace58750c3ae78c1aaad0577ecfd75a8a8d6
+  checksum: 6f6a3892bd2ae54b5f8c1bf331035042bb4f77294f202676c81e24ce533691bd
 - filename: src/utils/transactionsProcessor.js
-  checksum: 9fe2a1d6faf0b343f4abeb93a339f9fcf26e4749e4c958a0dda96a71b2fd1f14
+  checksum: 702a29d7e62b1eba54db3fbef404d6535b39718cc3296ebd821ce3687159da5c
 version: "1.0"

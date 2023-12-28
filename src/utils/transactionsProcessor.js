@@ -1,22 +1,22 @@
-import {csv2json} from "json-2-csv";
+import { csv2json } from "json-2-csv";
 
 const convertCsvStatementToJson = (csvTransactions) => {
   return csv2json(csvTransactions, { trimFieldValues: true, trimHeaderFields: true })
     .map((row, index) => ({
       transactionDate: row["Transaction Date"].replace(
         /(\d{2})-(\d{2})-(\d{4})/,
-        "$2/$1/$3",
+        "$2/$1/$3"
       ), // convert to MM/dd/yyyy
-      description: row["Description"].replaceAll(".", " "),
+      description: row.Description.replaceAll(".", " "),
       amount: parseFloat(
-        `${row["Debit"] || row["Credit"]}`.replaceAll(",", ""),
+        `${row.Debit || row.Credit}`.replaceAll(",", "")
       ),
-      isCredited: row["Debit"] === "",
-      key: index,
+      isCredited: row.Debit === "",
+      key: index
     }))
     .reduce(
       (store, statement) => ({ ...store, [statement.key]: statement }),
-      {},
+      {}
     );
 };
 
@@ -32,16 +32,16 @@ const splitDescription = (description) =>
 const analyzeStatement = (statement) =>
   splitDescription(statement.description).reduce(
     (acc, part) => ({ ...acc, [part]: statement.key }),
-    {},
+    {}
   );
 
 const mergeObject = (analyzedStatement, store) =>
   Object.keys(analyzedStatement).reduce(
     (updatedStore, key) => ({
       ...updatedStore,
-      [key]: [...(updatedStore[key] || []), analyzedStatement[key]],
+      [key]: [...(updatedStore[key] || []), analyzedStatement[key]]
     }),
-    store,
+    store
   );
 
 const deduplicate = (analyzedStatements) => {
@@ -50,24 +50,24 @@ const deduplicate = (analyzedStatements) => {
       const processedKey = analyzedStatements[key].sort();
       return {
         ...store,
-        [processedKey]: [...(store[processedKey] || []), key],
+        [processedKey]: [...(store[processedKey] || []), key]
       };
     },
-    {},
+    {}
   );
 
   return Object.keys(groupedAnalyzedStatements).reduce(
     (store, key) => ({
       ...store,
-      [groupedAnalyzedStatements[key].sort().slice(-1)]: key.split(","),
+      [groupedAnalyzedStatements[key].sort().slice(-1)]: key.split(",")
     }),
-    {},
+    {}
   );
 };
 
 const createSubStructure = (
   analyzedStatements,
-  keysNeedsToProcessed = Object.keys(analyzedStatements),
+  keysNeedsToProcessed = Object.keys(analyzedStatements)
 ) => {
   if (keysNeedsToProcessed.length === 0) return [];
   const keys = keysNeedsToProcessed.sort((a, b) => a.length - b.length);
@@ -77,7 +77,7 @@ const createSubStructure = (
     if (copiedKeys[key] === 1) return store;
 
     const filteredKeys = Object.keys(copiedKeys).filter(
-      (k) => copiedKeys[k] === 0 && k.startsWith(key) && k !== key,
+      (k) => copiedKeys[k] === 0 && k.startsWith(key) && k !== key
     );
 
     filteredKeys.forEach((k) => (copiedKeys[k] = 1));
@@ -88,8 +88,8 @@ const createSubStructure = (
       ...store,
       [key]: {
         self: analyzedStatements[key],
-        children: subStructure.length === 0 ? undefined : subStructure,
-      },
+        children: subStructure.length === 0 ? undefined : subStructure
+      }
     };
   }, {});
 };
@@ -104,8 +104,8 @@ const createAnalyzedGist = (statements) =>
       ...store,
       [storeKey]: {
         ...(store[storeKey] || {}),
-        ...mergeObject(analyzedStatement, store[storeKey] || {}),
-      },
+        ...mergeObject(analyzedStatement, store[storeKey] || {})
+      }
     };
   }, {});
 
@@ -119,22 +119,22 @@ const analyzeStatements = (statements) => {
         self: Object.values(statements)
           .filter(({ isCredited }) => !isCredited)
           .map(({ key }) => key),
-        children: createSubStructure(deduplicate(analyzedGist.debit || {})),
+        children: createSubStructure(deduplicate(analyzedGist.debit || {}))
       },
       credit: {
         self: Object.values(statements)
           .filter(({ isCredited }) => isCredited)
           .map(({ key }) => key),
-        children: createSubStructure(deduplicate(analyzedGist.credit || {})),
-      },
-    },
+        children: createSubStructure(deduplicate(analyzedGist.credit || {}))
+      }
+    }
   };
 };
 
 export const processCsvTransaction = (csvTransactions) => {
   const statements = convertCsvStatementToJson(csvTransactions);
-    return {
-      transactions: statements,
-      marshalledTransactions: analyzeStatements(statements),
-    };
+  return {
+    transactions: statements,
+    marshalledTransactions: analyzeStatements(statements)
+  };
 };

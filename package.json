@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "prettier --check **/*.{js,json,md} && eslint --ext .js,.vue --no-fix --max-warnings 0 .",
+    "lint:fix": "prettier --write **/*.{js,json,md} && eslint --ext .js,.vue --fix ."
   },
   "dependencies": {
     "@mdi/font": "^7.3.67",
@@ -21,6 +23,11 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-vue": "^9.19.2",
+    "prettier": "^3.1.1",
     "vite": "^5.0.8",
     "vite-plugin-vuetify": "^2.0.1"
   },
@@ -33,5 +40,51 @@
   "bugs": {
     "url": "https://github.com/sumanmaity112/financial-transactions-analyser/issues"
   },
-  "homepage": "https://github.com/sumanmaity112/financial-transactions-analyser#readme"
+  "homepage": "https://github.com/sumanmaity112/financial-transactions-analyser#readme",
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "es2021": true,
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/base",
+      "plugin:vue/vue3-essential",
+      "plugin:vue/vue3-strongly-recommended",
+      "plugin:vue/vue3-recommended",
+      "eslint:recommended",
+      "standard",
+      "prettier"
+    ],
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "plugins": [
+      "vue"
+    ],
+    "rules": {
+      "vue/multi-word-component-names": "off",
+      "semi": [
+        "error",
+        "always"
+      ],
+      "max-len": [
+        "error",
+        120
+      ],
+      "quotes": [
+        "error",
+        "double"
+      ],
+      "space-before-function-paren": [
+        "error",
+        {
+          "anonymous": "always",
+          "named": "never",
+          "asyncArrow": "always"
+        }
+      ]
+    }
+  }
 }

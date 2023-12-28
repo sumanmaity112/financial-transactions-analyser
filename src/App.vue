@@ -2,11 +2,11 @@
   <v-app>
     <v-main>
       <v-container
-          id="financial-transaction-analyzer-container"
-          class="ma-0 pa-0"
-          fluid
+        id="financial-transaction-analyzer-container"
+        class="ma-0 pa-0"
+        fluid
       >
-        <Dashboard/>
+        <Dashboard />
       </v-container>
     </v-main>
   </v-app>
@@ -14,12 +14,12 @@
 
 <script>
 
-import { useTheme } from 'vuetify';
+import { useTheme } from "vuetify";
 import Dashboard from "@/components/Dashboard.vue";
 
 export default {
-  name: 'App',
-  components: {Dashboard},
+  name: "App",
+  components: { Dashboard },
   data() {
     const themeInstance = useTheme();
     themeInstance.global.name.value = "dark";

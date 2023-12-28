@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'Header'
+  name: "DashboardHeader"
 };
 </script>
 
@@ -13,6 +13,7 @@ export default {
     >
       Financial Transaction Analyzer
     </v-app-bar-title>
+  </v-app-bar>
 </template>
 
 <style scoped>
