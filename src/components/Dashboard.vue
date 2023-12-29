@@ -56,6 +56,12 @@ export default {
       analyzing: false
     };
   },
+  beforeMount() {
+    window.addEventListener("beforeunload", this.unload);
+  },
+  beforeUnmount() {
+    window.removeEventListener("beforeunload", this.unload);
+  },
   methods: {
     resetErrorMessage() {
       this.errorMessage = "";
@@ -74,7 +80,13 @@ export default {
       } finally {
         this.analyzing = false;
       }
-    }
+    },
+    unload(event) {
+      if (this.csvTransactions === "") return true;
+
+      event.preventDefault();
+      event.returnValue = true;
+    },
   }
 };
 </script>
