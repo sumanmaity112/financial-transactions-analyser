@@ -44,7 +44,7 @@ import DashboardHeader from "@/components/DashboardHeader.vue";
 import { processCsvTransaction } from "@/utils/transactionsProcessor.js";
 
 export default {
-  name: "Home",
+  name: "Dashboard",
   components: { DashboardHeader, TransactionDashboard: TransactionsDashboard },
   data() {
     return {
