@@ -18,7 +18,18 @@ const routes = [
                 transactions, marshalledTransactions
             };
         }
-    }
+    },
+    {
+        path: "/analyse/prefix/:prefix",
+        name: "analyse-prefix",
+        component: TransactionsDashboard,
+        props: ({params: {prefix}}) => {
+            const {transactions, marshalledTransactions, drillDownPossible} = history.state;
+            return {
+                transactions, marshalledTransactions, prefix, drillDownPossible
+            };
+        }
+    },
 ];
 
 const router = createRouter({

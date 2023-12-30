@@ -28,17 +28,19 @@ export default {
     marshalledTransactions: {
       type: Object,
       required: true
+    },
+    prefix: {
+      type: String,
+      default: ".children"
+    },
+    drillDownPossible: {
+      type: Boolean,
+      default: true
     }
-  },
-  data() {
-    return {
-      activeRoot: ".children",
-      drillDownPossible: true
-    };
   },
   computed: {
     filteredTransactions() {
-      const children = this.getMarshalledTransactionsChildren(this.activeRoot);
+      const children = this.getMarshalledTransactionsChildren(this.prefix);
 
       return Object.keys(children)
         .reduce((store, key) => ({
@@ -48,9 +50,23 @@ export default {
     }
   },
   methods: {
+    getRouteParams(prefix, drillDownPossible){
+      return {
+        name: "analyse-prefix",
+        params: {prefix},
+        state: {transactions: this.transactions, marshalledTransactions: this.marshalledTransactions, drillDownPossible}
+      };
+    },
+    analysePrefix(prefix, drillDownPossible=true){
+      const routeParams = this.getRouteParams(prefix, drillDownPossible);
+      if (drillDownPossible)
+        this.$router.push(routeParams);
+      else{
+        this.$router.replace(routeParams);
+      }
+    },
     onDrillDownTransactions(childName) {
-      this.drillDownPossible = true;
-      this.activeRoot = `${this.activeRoot}.${childName}.children`;
+      this.analysePrefix(`${this.prefix}.${childName}.children`);
     },
     getMarshalledTransactionsChildren(root) {
       const children = root.split(".")
@@ -58,10 +74,8 @@ export default {
         .reduce((marshalledTransactions, key) => marshalledTransactions[key] || {}, this.marshalledTransactions);
 
       if (Object.keys(children).length === 0) {
-        const activeRoot = this.activeRoot.split(".").slice(0, -2).join(".");
-        this.activeRoot = activeRoot;
-        this.drillDownPossible = false;
-        return this.getMarshalledTransactionsChildren(activeRoot);
+        const activeRoot = this.prefix.split(".").slice(0, -2).join(".");
+        this.analysePrefix(activeRoot, false);
       }
 
       return children;

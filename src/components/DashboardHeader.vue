@@ -8,11 +8,12 @@ export default {
   <v-app-bar
     elevation="5"
   >
-    <v-app-bar-title
-      class="header-title text-center font-weight-bold pl-10"
-    >
+    <v-app-bar-nav-icon icon="mdi-home" href="#"/>
+    <v-spacer/>
+    <v-app-bar-title class="font-weight-bold">
       Financial Transactions Analyser
     </v-app-bar-title>
+    <v-spacer/>
   </v-app-bar>
 </template>
 
