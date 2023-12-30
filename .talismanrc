@@ -3,6 +3,8 @@ fileignoreconfig:
   checksum: fe28a383633b58228c6be66468aefd904c86b1632e4571336fedacf6d4265528
 - filename: src/components/AnalyzeTransactions.vue
   checksum: b42582eaede6558d110eb7faba69563d88c5797a40df5975abbce87ad762996c
+- filename: src/components/Dashboard.vue
+  checksum: 75a9d4312dd15f01282d043ffe4d0664da63c7ba768631201bad7dd808febe8e
 - filename: src/components/LineChart.vue
   checksum: ebb255af9cec6f270c7be52eb7c9cb6c191ef87bb8b76113a19b1429ed335213
 - filename: src/components/PieChart.vue

@@ -18,7 +18,7 @@
 import AnalyzeTransactions from "@/components/AnalyzeTransactions.vue";
 
 export default {
-  name: "TransactionDashboard",
+  name: "TransactionsDashboard",
   components: { AnalyzeTransactions },
   props: {
     transactions: {

@@ -1,37 +1,9 @@
 <template>
   <DashboardHeader />
-  <v-alert
-    v-if="!!errorMessage"
-    type="error"
-    title="Unable to process given CSV"
-    :text="errorMessage"
-    class="mt-2 w-33 mx-auto"
-    rounded
-    closable
-    @click:close="resetErrorMessage"
-  />
-  <v-container
-    v-if="displayTextArea"
-    class="mt-lg-16"
-  >
-    <v-textarea
-      v-model="csvTransactions"
-      clearable
-      label="Transactions as CSV"
-      variant="outlined"
-    />
-    <v-btn
-      text="Analyze"
-      block
-      elevation="3"
-      size="large"
-      :disabled="!csvTransactions"
-      :loading="analyzing"
-      @click="analyzeCsv"
-    />
-  </v-container>
-  <TransactionDashboard
-    v-else
+  <CsvTransactions v-if="Object.keys(transactions).length === 0" @analyse-transactions="analyseTransactions"/>
+  <TransactionsDashboard
+      v-else
+      class="mt-5"
     :transactions="transactions"
     :marshalled-transactions="marshalledTransactions"
   />
@@ -41,19 +13,15 @@
 
 import TransactionsDashboard from "@/components/TransactionsDashboard.vue";
 import DashboardHeader from "@/components/DashboardHeader.vue";
-import { processCsvTransaction } from "@/utils/transactionsProcessor.js";
+import CsvTransactions from "@/components/CsvTransactions.vue";
 
 export default {
   name: "Dashboard",
-  components: { DashboardHeader, TransactionDashboard: TransactionsDashboard },
+  components: {CsvTransactions, DashboardHeader, TransactionsDashboard },
   data() {
     return {
       transactions: {},
       marshalledTransactions: {},
-      csvTransactions: "",
-      displayTextArea: true,
-      errorMessage: "",
-      analyzing: false
     };
   },
   beforeMount() {
@@ -63,26 +31,12 @@ export default {
     window.removeEventListener("beforeunload", this.unload);
   },
   methods: {
-    resetErrorMessage() {
-      this.errorMessage = "";
-    },
-    analyzeCsv() {
-      this.analyzing = true;
-      try {
-        const { transactions, marshalledTransactions } = processCsvTransaction(this.csvTransactions);
-        this.resetErrorMessage();
-        this.displayTextArea = false;
-        this.transactions = transactions;
-        this.marshalledTransactions = marshalledTransactions;
-      } catch (e) {
-        console.error(e);
-        this.errorMessage = `${e.message}`;
-      } finally {
-        this.analyzing = false;
-      }
+    analyseTransactions({ transactions, marshalledTransactions }){
+      this.transactions = transactions;
+      this.marshalledTransactions = marshalledTransactions;
     },
     unload(event) {
-      if (this.csvTransactions === "") return true;
+      if (Object.keys(this.transactions).length === 0) return true;
 
       event.preventDefault();
       event.returnValue = true;
