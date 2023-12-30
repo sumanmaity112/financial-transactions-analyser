@@ -11,7 +11,7 @@ export default {
     <v-app-bar-title
       class="header-title text-center font-weight-bold pl-10"
     >
-      Financial Transaction Analyzer
+      Financial Transactions Analyser
     </v-app-bar-title>
   </v-app-bar>
 </template>
