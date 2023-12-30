@@ -1,6 +1,6 @@
 fileignoreconfig:
 - filename: package-lock.json
-  checksum: fe28a383633b58228c6be66468aefd904c86b1632e4571336fedacf6d4265528
+  checksum: 08c7f795984085faf0dc04697570652d5ea836fa7bfc470557c0c56d85c34f1f
 - filename: src/components/AnalyzeTransactions.vue
   checksum: b42582eaede6558d110eb7faba69563d88c5797a40df5975abbce87ad762996c
 - filename: src/components/Dashboard.vue
