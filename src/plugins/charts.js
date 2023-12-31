@@ -1,14 +1,13 @@
 import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale,
   ArcElement,
-  LineElement, PointElement
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Tooltip
 } from "chart.js";
 
-export default () => ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale,
-  LinearScale, ArcElement, LineElement, PointElement);
+export default () => ChartJS.register( Tooltip, Legend,CategoryScale,
+    LinearScale, ArcElement, LineElement, PointElement);
