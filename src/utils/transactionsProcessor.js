@@ -110,7 +110,7 @@ const createAnalyzedGist = (statements) =>
   Object.values(statements).reduce((store, statement) => {
     const analyzedStatement = analyzeStatement(statement);
 
-    const storeKey = statement.isCredited ? "credit" : "debit";
+    const storeKey = statement.isCredited ? "Credit" : "Debit";
 
     return {
       ...store,
@@ -127,17 +127,17 @@ const analyzeStatements = (statements) => {
   return {
     self: Object.keys(statements),
     children: {
-      debit: {
+      Debit: {
         self: Object.values(statements)
           .filter(({ isCredited }) => !isCredited)
           .map(({ key }) => key),
-        children: createSubStructure(deduplicate(analyzedGist.debit || {})),
+        children: createSubStructure(deduplicate(analyzedGist.Debit || {})),
       },
-      credit: {
+      Credit: {
         self: Object.values(statements)
           .filter(({ isCredited }) => isCredited)
           .map(({ key }) => key),
-        children: createSubStructure(deduplicate(analyzedGist.credit || {})),
+        children: createSubStructure(deduplicate(analyzedGist.Credit || {})),
       },
     },
   };

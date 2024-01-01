@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { generateColors } from "@/utils/colorGenerator.js";
+import { generateColors } from "@/utils/helper.js";
 import { Line } from "vue-chartjs";
 
 export default {

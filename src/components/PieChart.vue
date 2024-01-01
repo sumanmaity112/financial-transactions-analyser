@@ -4,7 +4,7 @@
 
 <script>
 import { Pie } from "vue-chartjs";
-import { generateColors } from "@/utils/colorGenerator.js";
+import { generateColors } from "@/utils/helper.js";
 
 export default {
   name: "PieChart",

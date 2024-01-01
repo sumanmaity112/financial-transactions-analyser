@@ -16,5 +16,5 @@ fileignoreconfig:
 - filename: src/utils/helper.js
   checksum: 40556d85e4d4a6344470d7123be8f9a17de42869fb344d381bb016a901fdbbf3
 - filename: src/utils/transactionsProcessor.js
-  checksum: ce34ef2e0d129a052fc7a24a0e47bc7b8d8b07b02902ac06fbe8a539a3c82b3f
+  checksum: ad2cb4ab94a6afc2ef94f2e4ab216bce4713a10d43cbb7f4a86589ca9c742a34
 version: "1.0"
