@@ -1,8 +1,5 @@
 <template>
-  <Pie
-    :data="chartData"
-    :options="options"
-  />
+  <Pie :data="chartData" :options="options" />
 </template>
 
 <script>
@@ -15,8 +12,8 @@ export default {
   props: {
     dataset: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   emits: ["pieClick"],
   data() {
@@ -25,8 +22,8 @@ export default {
         responsive: true,
         onClick: (event, activeElements) => {
           this.onPieClick(activeElements[0].index);
-        }
-      }
+        },
+      },
     };
   },
   computed: {
@@ -37,20 +34,18 @@ export default {
         datasets: [
           {
             backgroundColor: generateColors(keys.length),
-            data: keys.map(key => this.dataset[key])
-          }
-        ]
+            data: keys.map((key) => this.dataset[key]),
+          },
+        ],
       };
-    }
+    },
   },
   methods: {
     onPieClick(activeElementIndex) {
       this.$emit("pieClick", Object.keys(this.dataset)[activeElementIndex]);
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -13,18 +13,18 @@ export default defineConfig({
   plugins: [
     vue({ template: { transformAssetUrls } }),
     vuetify(),
-    splitVendorChunkPlugin()
+    splitVendorChunkPlugin(),
   ],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src")
+      "@": path.resolve(__dirname, "./src"),
     },
-    extensions: [".vue", ".js"]
+    extensions: [".vue", ".js"],
   },
   base: process.env.BASE_PATH || "./",
   server: {
     port: 8080,
     strictPort: true,
-    open: true
-  }
+    open: true,
+  },
 });

@@ -14,7 +14,6 @@
 </template>
 
 <script>
-
 import AnalyzeTransactions from "@/components/AnalyzeTransactions.vue";
 
 export default {
@@ -23,45 +22,52 @@ export default {
   props: {
     transactions: {
       type: Object,
-      required: true
+      required: true,
     },
     marshalledTransactions: {
       type: Object,
-      required: true
+      required: true,
     },
     prefix: {
       type: String,
-      default: ".children"
+      default: ".children",
     },
     drillDownPossible: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   computed: {
     filteredTransactions() {
       const children = this.getMarshalledTransactionsChildren(this.prefix);
 
-      return Object.keys(children)
-        .reduce((store, key) => ({
+      return Object.keys(children).reduce(
+        (store, key) => ({
           ...store,
-          [key]: children[key].self.map(transactionKey => this.transactions[transactionKey])
-        }), {});
-    }
+          [key]: children[key].self.map(
+            (transactionKey) => this.transactions[transactionKey],
+          ),
+        }),
+        {},
+      );
+    },
   },
   methods: {
-    getRouteParams(prefix, drillDownPossible){
+    getRouteParams(prefix, drillDownPossible) {
       return {
         name: "analyse-prefix",
-        params: {prefix},
-        state: {transactions: this.transactions, marshalledTransactions: this.marshalledTransactions, drillDownPossible}
+        params: { prefix },
+        state: {
+          transactions: this.transactions,
+          marshalledTransactions: this.marshalledTransactions,
+          drillDownPossible,
+        },
       };
     },
-    analysePrefix(prefix, drillDownPossible=true){
+    analysePrefix(prefix, drillDownPossible = true) {
       const routeParams = this.getRouteParams(prefix, drillDownPossible);
-      if (drillDownPossible)
-        this.$router.push(routeParams);
-      else{
+      if (drillDownPossible) this.$router.push(routeParams);
+      else {
         this.$router.replace(routeParams);
       }
     },
@@ -69,9 +75,13 @@ export default {
       this.analysePrefix(`${this.prefix}.${childName}.children`);
     },
     getMarshalledTransactionsChildren(root) {
-      const children = root.split(".")
-        .filter(k => k !== "")
-        .reduce((marshalledTransactions, key) => marshalledTransactions[key] || {}, this.marshalledTransactions);
+      const children = root
+        .split(".")
+        .filter((k) => k !== "")
+        .reduce(
+          (marshalledTransactions, key) => marshalledTransactions[key] || {},
+          this.marshalledTransactions,
+        );
 
       if (Object.keys(children).length === 0) {
         const activeRoot = this.prefix.split(".").slice(0, -2).join(".");
@@ -79,12 +89,9 @@ export default {
       }
 
       return children;
-    }
-  }
+    },
+  },
 };
-
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

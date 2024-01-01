@@ -8,8 +8,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "prettier --check **/*.{js,json,md} && eslint --ext .js,.vue --no-fix --max-warnings 0 .",
-    "lint:fix": "prettier --write **/*.{js,json,md} && eslint --ext .js,.vue --fix ."
+    "lint": "prettier --check ** && eslint --ext .js,.vue --no-fix --max-warnings 0 .",
+    "lint:fix": "prettier --write ** && eslint --ext .js,.vue --fix ."
   },
   "dependencies": {
     "@mdi/font": "^7.3.67",

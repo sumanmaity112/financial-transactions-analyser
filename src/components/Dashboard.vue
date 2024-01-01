@@ -1,15 +1,14 @@
 <template>
   <DashboardHeader />
-  <router-view @analyse-transactions="analyseTransactions"/>
+  <router-view @analyse-transactions="analyseTransactions" />
 </template>
 
 <script>
-
 import DashboardHeader from "@/components/DashboardHeader.vue";
 
 export default {
   name: "Dashboard",
-  components: { DashboardHeader, },
+  components: { DashboardHeader },
   data() {
     return {
       transactions: {},
@@ -17,15 +16,16 @@ export default {
     };
   },
   methods: {
-    analyseTransactions({ transactions, marshalledTransactions }){
+    analyseTransactions({ transactions, marshalledTransactions }) {
       this.transactions = transactions;
       this.marshalledTransactions = marshalledTransactions;
-      this.$router.push({name: "analyse", state: {transactions, marshalledTransactions}});
+      this.$router.push({
+        name: "analyse",
+        state: { transactions, marshalledTransactions },
+      });
     },
-  }
+  },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

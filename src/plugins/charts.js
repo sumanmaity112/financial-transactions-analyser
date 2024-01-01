@@ -6,8 +6,16 @@ import {
   LinearScale,
   LineElement,
   PointElement,
-  Tooltip
+  Tooltip,
 } from "chart.js";
 
-export default () => ChartJS.register( Tooltip, Legend,CategoryScale,
-    LinearScale, ArcElement, LineElement, PointElement);
+export default () =>
+  ChartJS.register(
+    Tooltip,
+    Legend,
+    CategoryScale,
+    LinearScale,
+    ArcElement,
+    LineElement,
+    PointElement,
+  );

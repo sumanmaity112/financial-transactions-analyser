@@ -1,8 +1,5 @@
 <template>
-  <Line
-    :data="chartData"
-    :options="options"
-  />
+  <Line :data="chartData" :options="options" />
 </template>
 
 <script>
@@ -16,52 +13,58 @@ export default {
   props: {
     dataset: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       options: {
         responsive: true,
         x: {
-          type: "time"
-        }
-      }
+          type: "time",
+        },
+      },
     };
   },
   computed: {
     chartData() {
-      const keys = Object.keys(Object.keys(this.dataset)
-        .flatMap(key => this.dataset[key].map(({ transactionDate }) => transactionDate))
-        .reduce((store, key) => {
-          return { ...store, [key]: 1 };
-        }, {}))
-        .sort((a, b) => new Date(a) - new Date(b));
+      const keys = Object.keys(
+        Object.keys(this.dataset)
+          .flatMap((key) =>
+            this.dataset[key].map(({ transactionDate }) => transactionDate),
+          )
+          .reduce((store, key) => {
+            return { ...store, [key]: 1 };
+          }, {}),
+      ).sort((a, b) => new Date(a) - new Date(b));
 
-      const groupedDataset = Object.keys(this.dataset)
-        .reduce((store, key) => ({
+      const groupedDataset = Object.keys(this.dataset).reduce(
+        (store, key) => ({
           ...store,
-          [key]: this.dataset[key].reduce((specificStore, { transactionDate, amount }) => ({
-            ...specificStore,
-            [transactionDate]: (specificStore[transactionDate] || 0) + amount
-          }), {})
-        }), {});
+          [key]: this.dataset[key].reduce(
+            (specificStore, { transactionDate, amount }) => ({
+              ...specificStore,
+              [transactionDate]: (specificStore[transactionDate] || 0) + amount,
+            }),
+            {},
+          ),
+        }),
+        {},
+      );
       const colors = generateColors(Object.keys(this.dataset).length);
 
       return {
-        labels: keys.map(key => new Date(key).toLocaleDateString()),
+        labels: keys.map((key) => new Date(key).toLocaleDateString()),
         datasets: Object.keys(this.dataset).map((label, index) => ({
           label,
-          data: keys.map(key => groupedDataset[label][key] || 0),
+          data: keys.map((key) => groupedDataset[label][key] || 0),
           fill: false,
-          borderColor: colors[index]
-        }))
+          borderColor: colors[index],
+        })),
       };
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
