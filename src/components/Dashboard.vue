@@ -1,6 +1,8 @@
 <template>
   <DashboardHeader />
-  <router-view @analyse-transactions="analyseTransactions" />
+  <v-container fluid>
+    <router-view @analyse-transactions="analyseTransactions" />
+  </v-container>
 </template>
 
 <script>

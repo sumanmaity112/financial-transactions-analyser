@@ -1,4 +1,15 @@
 <template>
+  <v-alert type="info" class="my-5" border="start" variant="tonal">
+    <p class="text-h6">
+      Sample CSV data can be found
+      <a
+        class="text-decoration-none text-primary font-weight-medium d-inline-flex align-center"
+        href="https://github.com/sumanmaity112/financial-transactions-analyser?tab=readme-ov-file#csv-format"
+        target="_blank"
+        >here</a
+      >
+    </p>
+  </v-alert>
   <v-alert
     v-if="!!errorMessage"
     type="error"
