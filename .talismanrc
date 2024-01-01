@@ -11,6 +11,8 @@ fileignoreconfig:
   checksum: e2e32c26c9346e14e67f2de2536d43c8293b19e0d8b5bd522f8578949edb9d86
 - filename: src/components/TransactionsDashboard.vue
   checksum: 0ba07b680c839500994e6e3775e523698d98427b5766d3155921d7f5bd0a4b45
+- filename: src/utils/helper.js
+  checksum: 40556d85e4d4a6344470d7123be8f9a17de42869fb344d381bb016a901fdbbf3
 - filename: src/utils/transactionsProcessor.js
-  checksum: b0b61346fb7f4a56ff19891d4b09c66b27f239a66f7656eb0ce0ae3fa1d1508d
+  checksum: 15862dcd24ce995b5a6509bd6dabc882d0fbc762d4346c5dae74c933974ea94d
 version: "1.0"

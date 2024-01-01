@@ -1,10 +1,14 @@
 import { csv2json } from "json-2-csv";
+import { isEmpty } from "./helper.js";
 
 const convertCsvStatementToJson = (csvTransactions) => {
   return csv2json(csvTransactions, {
     trimFieldValues: true,
     trimHeaderFields: true,
+    keys: ["Transaction Date", "Description", "Debit", "Credit"],
+    parseValue: (value) => (value === "" ? undefined : value),
   })
+    .filter((row) => !isEmpty(row))
     .map((row, index) => ({
       transactionDate: row["Transaction Date"].replace(
         /(\d{2})-(\d{2})-(\d{4})/,
@@ -12,7 +16,7 @@ const convertCsvStatementToJson = (csvTransactions) => {
       ), // convert to MM/dd/yyyy
       description: row.Description.replaceAll(".", " "),
       amount: parseFloat(`${row.Debit || row.Credit}`.replaceAll(",", "")),
-      isCredited: row.Debit === "",
+      isCredited: !row.Debit,
       key: index,
     }))
     .reduce(
