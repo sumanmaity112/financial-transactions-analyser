@@ -5,6 +5,7 @@ import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 
 import path from "path";
 import { fileURLToPath } from "url";
+import { VitePWA } from "vite-plugin-pwa";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,6 +15,7 @@ export default defineConfig({
     vue({ template: { transformAssetUrls } }),
     vuetify(),
     splitVendorChunkPlugin(),
+    VitePWA({ registerType: "autoUpdate" }),
   ],
   resolve: {
     alias: {
