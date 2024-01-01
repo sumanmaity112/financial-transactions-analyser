@@ -12,7 +12,8 @@
     "lint:fix": "prettier --write ** && eslint --ext .js,.vue --fix ."
   },
   "dependencies": {
-    "@mdi/font": "^7.3.67",
+    "@mdi/font": "^7.4.47",
+    "ag-grid-vue3": "^31.0.1",
     "chart.js": "^4.4.1",
     "d3-scale": "^4.0.2",
     "d3-scale-chromatic": "^3.0.0",
