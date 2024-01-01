@@ -5,6 +5,8 @@
 Use charts to analyse CSV financial transactions, such as bank transactions.
 This uses browser history to communicate data between pages, but it doesn't exchange any information with third parties.
 
+<img src="https://github.com/sumanmaity112/financial-transactions-analyser/blob/main/screenshots/sample.gif" height="500" alt="pairing-matrix">
+
 ## CSV Format
 
 The following format of CSV data is needed for this application:
