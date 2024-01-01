@@ -13,19 +13,11 @@
 </template>
 
 <script>
-import { useTheme } from "vuetify";
 import Dashboard from "@/components/Dashboard.vue";
 
 export default {
   name: "App",
   components: { Dashboard },
-  data() {
-    const themeInstance = useTheme();
-    themeInstance.global.name.value = "dark";
-    return {
-      theme: themeInstance,
-    };
-  },
   computed: {},
 };
 </script>
