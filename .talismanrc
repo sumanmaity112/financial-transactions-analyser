@@ -3,6 +3,8 @@ fileignoreconfig:
   checksum: 17178fd98dba6d710595c9af8174e996b920a39e436399a07a5cd406d5f53463
 - filename: src/components/AnalyzeTransactions.vue
   checksum: 2039495dd2d4833292ed83684bacacabf268fb88fa7cf3e22ef9269b609579b8
+- filename: src/components/Charts.vue
+  checksum: e827934507fd8f7f0522a9d4f55879fe44a1dda044f7de190eae76adca3e687d
 - filename: src/components/Dashboard.vue
   checksum: 75a9d4312dd15f01282d043ffe4d0664da63c7ba768631201bad7dd808febe8e
 - filename: src/components/LineChart.vue
@@ -14,5 +16,5 @@ fileignoreconfig:
 - filename: src/utils/helper.js
   checksum: 40556d85e4d4a6344470d7123be8f9a17de42869fb344d381bb016a901fdbbf3
 - filename: src/utils/transactionsProcessor.js
-  checksum: 15862dcd24ce995b5a6509bd6dabc882d0fbc762d4346c5dae74c933974ea94d
+  checksum: ce34ef2e0d129a052fc7a24a0e47bc7b8d8b07b02902ac06fbe8a539a3c82b3f
 version: "1.0"

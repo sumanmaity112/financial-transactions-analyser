@@ -1,23 +1,21 @@
 <template>
   <v-container fluid>
-    <v-row>
-      <v-col cols="4">
-        <PieChart :dataset="pieChartDataset" @pie-click="onPieClick" />
-      </v-col>
-      <v-col cols="8">
-        <LineChart :dataset="transactions" />
-      </v-col>
-    </v-row>
+    <Charts
+      :transactions="transactions"
+      @drill-down-transactions="onPieClick"
+    />
+    <v-divider class="my-2" />
+    <Transactions :transactions="transactionValues" />
   </v-container>
 </template>
 
 <script>
-import PieChart from "@/components/PieChart.vue";
-import LineChart from "@/components/LineChart.vue";
+import Charts from "@/components/Charts.vue";
+import Transactions from "@/components/Transactions.vue";
 
 export default {
   name: "AnalyzeTransactions",
-  components: { LineChart, PieChart },
+  components: { Transactions, Charts },
   props: {
     transactions: {
       type: Object,
@@ -26,17 +24,8 @@ export default {
   },
   emits: ["drillDownTransactions"],
   computed: {
-    pieChartDataset() {
-      return Object.keys(this.transactions).reduce(
-        (set, key) => ({
-          ...set,
-          [key]: this.transactions[key].reduce(
-            (totalAmount, { amount }) => totalAmount + amount,
-            0,
-          ),
-        }),
-        {},
-      );
+    transactionValues() {
+      return Object.values(this.transactions).flatMap((x) => x);
     },
   },
   methods: {

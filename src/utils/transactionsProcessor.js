@@ -5,7 +5,13 @@ const convertCsvStatementToJson = (csvTransactions) => {
   return csv2json(csvTransactions, {
     trimFieldValues: true,
     trimHeaderFields: true,
-    keys: ["Transaction Date", "Description", "Debit", "Credit"],
+    keys: [
+      "Transaction Date",
+      "Description",
+      "Chq / Ref No",
+      "Debit",
+      "Credit",
+    ],
     parseValue: (value) => (value === "" ? undefined : value),
   })
     .filter((row) => !isEmpty(row))
@@ -17,6 +23,7 @@ const convertCsvStatementToJson = (csvTransactions) => {
       description: row.Description.replaceAll(".", " "),
       amount: parseFloat(`${row.Debit || row.Credit}`.replaceAll(",", "")),
       isCredited: !row.Debit,
+      ref: row["Chq / Ref No"],
       key: index,
     }))
     .reduce(
