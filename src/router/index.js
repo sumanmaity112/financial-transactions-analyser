@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import CsvTransactions from "@/components/CsvTransactions.vue";
-import TransactionsDashboard from "@/components/TransactionsDashboard.vue";
+import AnalyseTransactionsByDescriptionDashboard from "@/components/AnalyseTransactionsByDescriptionDashboard.vue";
+import Dashboard from "@/components/Dashboard.vue";
 
 const routes = [
   {
@@ -9,29 +10,26 @@ const routes = [
     component: CsvTransactions,
   },
   {
-    path: "/analyse",
-    name: "analyse",
-    component: TransactionsDashboard,
+    path: "/dashboard",
+    name: "dashboard",
+    component: Dashboard,
     props: () => {
-      const { transactions, marshalledTransactions } = history.state;
+      const { transactions } = history.state;
       return {
         transactions,
-        marshalledTransactions,
       };
     },
   },
   {
-    path: "/analyse/prefix/:prefix",
-    name: "analyse-prefix",
-    component: TransactionsDashboard,
-    props: ({ params: { prefix } }) => {
-      const { transactions, marshalledTransactions, drillDownPossible } =
-        history.state;
+    path: "/analyse/descriptions",
+    name: "analyse-descriptions",
+    component: AnalyseTransactionsByDescriptionDashboard,
+    props: ({ query: { prefix } }) => {
+      const { transactions, marshalledTransactions } = history.state;
       return {
         transactions,
         marshalledTransactions,
         prefix,
-        drillDownPossible,
       };
     },
   },

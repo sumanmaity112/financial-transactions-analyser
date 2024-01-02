@@ -1,7 +1,7 @@
 import { csv2json } from "json-2-csv";
 import { isEmpty } from "./helper.js";
 
-const convertCsvStatementToJson = (csvTransactions) => {
+export const convertCsvStatementsToJson = (csvTransactions) => {
   return csv2json(csvTransactions, {
     trimFieldValues: true,
     trimHeaderFields: true,
@@ -121,7 +121,7 @@ const createAnalyzedGist = (statements) =>
     };
   }, {});
 
-const analyzeStatements = (statements) => {
+export const analyzeStatementsByDescriptions = (statements) => {
   const analyzedGist = createAnalyzedGist(statements);
 
   return {
@@ -140,13 +140,5 @@ const analyzeStatements = (statements) => {
         children: createSubStructure(deduplicate(analyzedGist.Credit || {})),
       },
     },
-  };
-};
-
-export const processCsvTransaction = (csvTransactions) => {
-  const statements = convertCsvStatementToJson(csvTransactions);
-  return {
-    transactions: statements,
-    marshalledTransactions: analyzeStatements(statements),
   };
 };

@@ -27,7 +27,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-IN", {
 });
 
 export default {
-  name: "Transactions",
+  name: "TransactionsTable",
   components: { AgGridVue },
   props: {
     transactions: {

@@ -1,29 +1,58 @@
 <template>
-  <DashboardHeader />
   <v-container fluid>
-    <router-view @analyse-transactions="analyseTransactions" />
+    <v-row>
+      <v-col cols="6">
+        <PieChart :dataset="chartData" />
+      </v-col>
+      <v-col cols="1" />
+      <v-col cols="5" class="align-self-center">
+        <v-btn
+          append-icon="mdi-arrow-right-bold"
+          size="x-large"
+          block
+          elevation="5"
+          height="100"
+          rounded
+          @click="onAnalyseByDescriptionClick"
+        >
+          Analyse by transaction description
+        </v-btn>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
-import DashboardHeader from "@/components/DashboardHeader.vue";
+import PieChart from "@/components/PieChart.vue";
+import { calculateTotalAmountByTransactionType } from "@/utils/helper.js";
+import { analyzeStatementsByDescriptions } from "@/utils/transactionsProcessor.js";
 
 export default {
   name: "Dashboard",
-  components: { DashboardHeader },
-  data() {
-    return {
-      transactions: {},
-      marshalledTransactions: {},
-    };
+  components: { PieChart },
+  props: {
+    transactions: {
+      type: Object,
+      required: true,
+    },
+  },
+  computed: {
+    chartData() {
+      return calculateTotalAmountByTransactionType(
+        Object.values(this.transactions),
+      );
+    },
   },
   methods: {
-    analyseTransactions({ transactions, marshalledTransactions }) {
-      this.transactions = transactions;
-      this.marshalledTransactions = marshalledTransactions;
+    onAnalyseByDescriptionClick() {
       this.$router.push({
-        name: "analyse",
-        state: { transactions, marshalledTransactions },
+        name: "analyse-descriptions",
+        state: {
+          transactions: this.transactions,
+          marshalledTransactions: analyzeStatementsByDescriptions(
+            this.transactions,
+          ),
+        },
       });
     },
   },

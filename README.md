@@ -30,6 +30,8 @@ The following format of CSV data is needed for this application:
 ```
 Transaction Date,Description,Credit,Debit,Chq / Ref No
 21-08-2023,NEFT:Salary,"23,237.00","",NEFT-1234
+25-08-2023,NEFT:Salary,"23,267.00","",NEFT-1235
+28-08-2023,NEFT:Salary,"23,167.00","",NEFT-1236
 21-08-2023,NEFT:Rent,"","3,724.33",NEFT-0986
 22-08-2023,MB:Commission,245.00,"",KPG-0181
 23-08-2023,NEFT:FD Interest,"12,480.00","",PP-0403

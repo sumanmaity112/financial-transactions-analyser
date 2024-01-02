@@ -60,6 +60,10 @@ export default {
           data: keys.map((key) => groupedDataset[label][key] || 0),
           fill: false,
           borderColor: colors[index],
+          pointBackgroundColor: colors[index],
+          pointHoverBorderColor: colors[index],
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
         })),
       };
     },

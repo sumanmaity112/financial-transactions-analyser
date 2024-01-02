@@ -23,3 +23,33 @@ export const isEmpty = (value) => {
   }
   return true;
 };
+
+const groupBy = (elements, keyGenerator) =>
+  elements.reduce((store, element) => {
+    const key = keyGenerator(element);
+    return { ...store, [key]: [...(store[key] || []), element] };
+  }, {});
+
+const transactionKeyByType = ({ isCredited }) =>
+  isCredited ? "Credit" : "Debit";
+
+export const calculateTotalAmountByTransactionType = (transactions) => {
+  const groupedTransactions = groupBy(transactions, transactionKeyByType);
+  return Object.keys(groupedTransactions).reduce(
+    (store, key) => ({
+      ...store,
+      [key]: groupedTransactions[key].reduce(
+        (totalAmount, { amount }) => totalAmount + amount,
+        0,
+      ),
+    }),
+    {},
+  );
+};
+
+export const readObjectProperty = (object, path) => {
+  return path
+    .split(".")
+    .filter((key) => key !== "")
+    .reduce((store, key) => store[key] || {}, object);
+};

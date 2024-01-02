@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { processCsvTransaction } from "@/utils/transactionsProcessor.js";
+import { convertCsvStatementsToJson } from "@/utils/transactionsProcessor.js";
 
 export default {
   name: "CsvTransactions",
@@ -59,14 +59,9 @@ export default {
     analyzeCsv() {
       this.analyzing = true;
       try {
-        const { transactions, marshalledTransactions } = processCsvTransaction(
-          this.csvTransactions,
-        );
+        const transactions = convertCsvStatementsToJson(this.csvTransactions);
         this.resetErrorMessage();
-        this.$emit("analyseTransactions", {
-          transactions,
-          marshalledTransactions,
-        });
+        this.$emit("analyseTransactions", transactions);
       } catch (e) {
         console.error(e);
         this.errorMessage = `${e.message}`;

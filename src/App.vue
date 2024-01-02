@@ -6,19 +6,18 @@
         class="ma-0 pa-0"
         fluid
       >
-        <Dashboard />
+        <Home />
       </v-container>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Dashboard from "@/components/Dashboard.vue";
+import Home from "@/components/Home.vue";
 
 export default {
   name: "App",
-  components: { Dashboard },
-  computed: {},
+  components: { Home },
 };
 </script>
 
