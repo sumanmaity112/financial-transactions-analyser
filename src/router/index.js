@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import CsvTransactions from "@/components/CsvTransactions.vue";
 import AnalyseTransactionsByDescriptionDashboard from "@/components/AnalyseTransactionsByDescriptionDashboard.vue";
 import Dashboard from "@/components/Dashboard.vue";
+import AnalyseTransactionsByDateDashboard from "@/components/AnalyseTransactionsByDateDashboard.vue";
 
 const routes = [
   {
@@ -22,7 +23,7 @@ const routes = [
   },
   {
     path: "/analyse/descriptions",
-    name: "analyse-descriptions",
+    name: "analyse-by-descriptions",
     component: AnalyseTransactionsByDescriptionDashboard,
     props: ({ query: { prefix } }) => {
       const { transactions, marshalledTransactions } = history.state;
@@ -30,6 +31,19 @@ const routes = [
         transactions,
         marshalledTransactions,
         prefix,
+      };
+    },
+  },
+  {
+    path: "/analyse/transaction-date",
+    name: "analyse-by-transaction-date",
+    component: AnalyseTransactionsByDateDashboard,
+    props: ({ query: { to, from } }) => {
+      const { transactions } = history.state;
+      return {
+        transactions,
+        to,
+        from,
       };
     },
   },

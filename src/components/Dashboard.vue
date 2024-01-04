@@ -17,6 +17,18 @@
         >
           Analyse by transaction description
         </v-btn>
+        <v-btn
+          append-icon="mdi-arrow-right-bold"
+          size="x-large"
+          class="mt-6"
+          block
+          elevation="5"
+          height="100"
+          rounded
+          @click="onAnalyseByTransactionDateClick"
+        >
+          Analyse by transaction date
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -46,7 +58,18 @@ export default {
   methods: {
     onAnalyseByDescriptionClick() {
       this.$router.push({
-        name: "analyse-descriptions",
+        name: "analyse-by-descriptions",
+        state: {
+          transactions: this.transactions,
+          marshalledTransactions: analyzeStatementsByDescriptions(
+            this.transactions,
+          ),
+        },
+      });
+    },
+    onAnalyseByTransactionDateClick() {
+      this.$router.push({
+        name: "analyse-by-transaction-date",
         state: {
           transactions: this.transactions,
           marshalledTransactions: analyzeStatementsByDescriptions(

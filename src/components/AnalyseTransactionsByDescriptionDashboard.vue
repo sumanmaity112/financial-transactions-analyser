@@ -93,7 +93,7 @@ export default {
     },
     analyseDescription(childName, filteredMarshalledStatements) {
       this.$router.push({
-        name: "analyse-descriptions",
+        name: "analyse-by-descriptions",
         query: { prefix: `${this.prefix}.${childName}` },
         state: {
           transactions: this.transactions,

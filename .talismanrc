@@ -1,6 +1,6 @@
 fileignoreconfig:
 - filename: package-lock.json
-  checksum: d16834aa53fec483c70cce2efa1f94b4cf10094ccb1c328936aa31bfc402928e
+  checksum: cc14c2b4986db97ea1ca824784d2bf82e9c34766f6f0e9f25c5ece8120bc5558
 - filename: src/components/AnalyzeTransactions.vue
   checksum: 2039495dd2d4833292ed83684bacacabf268fb88fa7cf3e22ef9269b609579b8
 - filename: src/components/Charts.vue
@@ -11,6 +11,8 @@ fileignoreconfig:
   checksum: 9dbb5c1df563288394716f104c9e5437fa488af96fd3739af443f0f7ca843a11
 - filename: src/components/PieChart.vue
   checksum: e2e32c26c9346e14e67f2de2536d43c8293b19e0d8b5bd522f8578949edb9d86
+- filename: src/components/RadarChart.vue
+  checksum: 6bbac16e6cf20356c8e118c9f74ba863cc1f36edbebe568f850087dc437e9aa2
 - filename: src/components/TransactionsDashboard.vue
   checksum: 0ba07b680c839500994e6e3775e523698d98427b5766d3155921d7f5bd0a4b45
 - filename: src/utils/helper.js

@@ -24,17 +24,17 @@ export const isEmpty = (value) => {
   return true;
 };
 
-const groupBy = (elements, keyGenerator) =>
+export const groupBy = (elements, keyGenerator) =>
   elements.reduce((store, element) => {
     const key = keyGenerator(element);
     return { ...store, [key]: [...(store[key] || []), element] };
   }, {});
 
-const transactionKeyByType = ({ isCredited }) =>
+export const getTransactionTypeName = ({ isCredited }) =>
   isCredited ? "Credit" : "Debit";
 
-export const calculateTotalAmountByTransactionType = (transactions) => {
-  const groupedTransactions = groupBy(transactions, transactionKeyByType);
+const calculateTotalAmountGroupedBy = (transactions, keyGenerator) => {
+  const groupedTransactions = groupBy(transactions, keyGenerator);
   return Object.keys(groupedTransactions).reduce(
     (store, key) => ({
       ...store,
@@ -46,6 +46,15 @@ export const calculateTotalAmountByTransactionType = (transactions) => {
     {},
   );
 };
+
+export const calculateTotalAmountByTransactionType = (transactions) =>
+  calculateTotalAmountGroupedBy(transactions, getTransactionTypeName);
+
+export const calculateTotalAmountByTransactionDate = (transactions) =>
+  calculateTotalAmountGroupedBy(
+    transactions,
+    ({ transactionDate }) => transactionDate,
+  );
 
 export const readObjectProperty = (object, path) => {
   return path
