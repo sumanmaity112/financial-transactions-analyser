@@ -3,12 +3,14 @@
     <v-card-title class="font-weight-bold">
       Analyse transactions by description
     </v-card-title>
-    <v-card-subtitle>{{ processedPrefix }}</v-card-subtitle>
+    <v-card-subtitle class="font-weight-bold">{{
+      processedPrefix
+    }}</v-card-subtitle>
     <v-divider />
     <v-alert
       v-if="!drillDownPossible"
       type="warning"
-      title="Drill down is not possible anymore"
+      title="Further details not possible"
       class="mt-2 w-33 mx-auto"
       rounded
       closable
