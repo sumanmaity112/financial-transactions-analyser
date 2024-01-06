@@ -14,6 +14,7 @@ const routes = [
     path: "/dashboard",
     name: "dashboard",
     component: Dashboard,
+    meta: { transactionHistoryRequired: true },
     props: () => {
       const { transactions } = history.state;
       return {
@@ -25,6 +26,7 @@ const routes = [
     path: "/analyse/descriptions",
     name: "analyse-by-descriptions",
     component: AnalyseTransactionsByDescriptionDashboard,
+    meta: { transactionHistoryRequired: true },
     props: ({ query: { prefix } }) => {
       const { transactions, marshalledTransactions } = history.state;
       return {
@@ -38,6 +40,7 @@ const routes = [
     path: "/analyse/transaction-date",
     name: "analyse-by-transaction-date",
     component: AnalyseTransactionsByDateDashboard,
+    meta: { transactionHistoryRequired: true },
     props: ({ query: { to, from } }) => {
       const { transactions } = history.state;
       return {
@@ -52,6 +55,24 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+});
+
+const hasInvalidHistory = (to, from) => {
+  const { transactions } = history.state;
+  return (
+    from.meta.transactionHistoryRequired &&
+    to.meta.transactionHistoryRequired &&
+    !transactions
+  );
+};
+
+router.beforeEach((to, from) => {
+  if (hasInvalidHistory(to, from)) return false;
+
+  if (to.matched.length === 0) {
+    if (from.meta.transactionHistoryRequired) return false;
+    return { path: "/" };
+  }
 });
 
 export default router;
