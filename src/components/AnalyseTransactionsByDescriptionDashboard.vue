@@ -75,6 +75,14 @@ export default {
       return this.prefix.replaceAll(".", " ");
     },
   },
+  watch: {
+    prefix: {
+      handler() {
+        this.resetDrillDownPossible();
+      },
+      immediate: true,
+    },
+  },
   methods: {
     resetDrillDownPossible() {
       this.drillDownPossible = true;
