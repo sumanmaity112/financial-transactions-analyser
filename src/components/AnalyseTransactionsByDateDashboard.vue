@@ -37,7 +37,8 @@
       </div>
     </v-card-title>
     <v-divider />
-    <v-container fluid>
+    <TransactionsUnavailable v-if="transactionsUnavailable" />
+    <v-container v-else fluid>
       <v-row>
         <v-col cols="5">
           <RadarChart :transactions="transactionValues" />
@@ -54,13 +55,15 @@
 import TransactionsTable from "@/components/TransactionsTable.vue";
 import RadarChart from "@/components/RadarChart.vue";
 import { format, isAfter, isBefore, isEqual, parse } from "date-fns";
+import { isEmpty } from "@/utils/helper.js";
+import TransactionsUnavailable from "@/components/TransactionsUnavailable.vue";
 
 const DEFAULT_INITIAL_DATE = format(new Date("1970-01-01"), "yyyy-MM-dd");
 const TODAY = format(new Date(), "yyyy-MM-dd");
 
 export default {
   name: "AnalyseTransactionsByDateDashboard",
-  components: { RadarChart, TransactionsTable },
+  components: { TransactionsUnavailable, RadarChart, TransactionsTable },
   props: {
     transactions: {
       type: Object,
@@ -109,6 +112,9 @@ export default {
       return isBefore(this.from, DEFAULT_INITIAL_DATE)
         ? this.from
         : DEFAULT_INITIAL_DATE;
+    },
+    transactionsUnavailable() {
+      return isEmpty(this.transactionValues);
     },
   },
   watch: {

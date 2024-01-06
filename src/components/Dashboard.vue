@@ -1,5 +1,6 @@
 <template>
-  <v-container fluid>
+  <TransactionsUnavailable v-if="transactionsUnavailable" />
+  <v-container v-else fluid>
     <v-row>
       <v-col cols="6">
         <PieChart :dataset="chartData" />
@@ -36,12 +37,16 @@
 
 <script>
 import PieChart from "@/components/PieChart.vue";
-import { calculateTotalAmountByTransactionType } from "@/utils/helper.js";
+import {
+  calculateTotalAmountByTransactionType,
+  isEmpty,
+} from "@/utils/helper.js";
 import { analyzeStatementsByDescriptions } from "@/utils/transactionsProcessor.js";
+import TransactionsUnavailable from "@/components/TransactionsUnavailable.vue";
 
 export default {
   name: "Dashboard",
-  components: { PieChart },
+  components: { TransactionsUnavailable, PieChart },
   props: {
     transactions: {
       type: Object,
@@ -53,6 +58,9 @@ export default {
       return calculateTotalAmountByTransactionType(
         Object.values(this.transactions),
       );
+    },
+    transactionsUnavailable() {
+      return isEmpty(this.transactions);
     },
   },
   methods: {
