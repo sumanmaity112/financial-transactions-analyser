@@ -39,31 +39,28 @@
     <v-divider />
     <TransactionsUnavailable v-if="transactionsUnavailable" />
     <v-container v-else fluid>
-      <v-row>
-        <v-col cols="5">
-          <RadarChart :transactions="transactionValues" />
-        </v-col>
-        <v-col cols="7">
-          <TransactionsTable :transactions="transactionValues" />
-        </v-col>
-      </v-row>
+      <div style="height: 500px">
+        <LineChart :dataset="transactionValuesGroupedByType" />
+      </div>
+      <v-divider class="my-2" />
+      <TransactionsTable :transactions="transactionValues" />
     </v-container>
   </v-card>
 </template>
 
 <script>
 import TransactionsTable from "@/components/TransactionsTable.vue";
-import RadarChart from "@/components/RadarChart.vue";
 import { format, isAfter, isBefore, isEqual, parse } from "date-fns";
-import { isEmpty } from "@/utils/helper.js";
+import { getTransactionTypeName, groupBy, isEmpty } from "@/utils/helper.js";
 import TransactionsUnavailable from "@/components/TransactionsUnavailable.vue";
+import LineChart from "@/components/LineChart.vue";
 
 const DEFAULT_INITIAL_DATE = format(new Date("1970-01-01"), "yyyy-MM-dd");
 const TODAY = format(new Date(), "yyyy-MM-dd");
 
 export default {
   name: "AnalyseTransactionsByDateDashboard",
-  components: { TransactionsUnavailable, RadarChart, TransactionsTable },
+  components: { LineChart, TransactionsUnavailable, TransactionsTable },
   props: {
     transactions: {
       type: Object,
@@ -87,6 +84,9 @@ export default {
   computed: {
     analyseButtonEnabled() {
       return this.from !== this.selectedFrom || this.to !== this.selectedTo;
+    },
+    transactionValuesGroupedByType() {
+      return groupBy(this.transactionValues, getTransactionTypeName);
     },
     transactionValues() {
       return Object.values(this.transactions)

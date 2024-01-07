@@ -20,6 +20,7 @@ export default {
     return {
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         x: {
           type: "time",
         },

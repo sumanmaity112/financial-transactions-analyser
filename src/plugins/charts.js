@@ -7,7 +7,6 @@ import {
   LinearScale,
   LineElement,
   PointElement,
-  RadialLinearScale,
   Tooltip,
 } from "chart.js";
 
@@ -20,6 +19,5 @@ export default () =>
     ArcElement,
     LineElement,
     PointElement,
-    RadialLinearScale,
     Filler,
   );
