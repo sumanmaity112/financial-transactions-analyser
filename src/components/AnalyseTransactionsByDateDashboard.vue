@@ -39,7 +39,7 @@
     <v-divider />
     <TransactionsUnavailable v-if="transactionsUnavailable" />
     <v-container v-else fluid>
-      <div style="height: 500px">
+      <div style="height: 31rem">
         <LineChart :dataset="transactionValuesGroupedByType" />
       </div>
       <v-divider class="my-2" />

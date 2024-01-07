@@ -4,7 +4,7 @@
       :column-defs="colDefs"
       :default-col-def="defaultColDef"
       :row-data="rowData"
-      style="width: 100%; height: 500px"
+      style="width: 100%; height: 31rem"
       class="ag-theme-material transaction-table"
       pagination="true"
     />
