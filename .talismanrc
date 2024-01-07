@@ -8,7 +8,7 @@ fileignoreconfig:
 - filename: src/components/Dashboard.vue
   checksum: 75a9d4312dd15f01282d043ffe4d0664da63c7ba768631201bad7dd808febe8e
 - filename: src/components/LineChart.vue
-  checksum: 9dbb5c1df563288394716f104c9e5437fa488af96fd3739af443f0f7ca843a11
+  checksum: e5f008f50852ca18876d014e54ab7858d8c090012c8d1636f49b26792531bbc3
 - filename: src/components/PieChart.vue
   checksum: e2e32c26c9346e14e67f2de2536d43c8293b19e0d8b5bd522f8578949edb9d86
 - filename: src/components/RadarChart.vue

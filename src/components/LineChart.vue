@@ -3,7 +3,10 @@
 </template>
 
 <script>
-import { generateColors } from "@/utils/helper.js";
+import {
+  calculateTotalAmountByTransactionDate,
+  generateColors,
+} from "@/utils/helper.js";
 import { Line } from "vue-chartjs";
 
 export default {
@@ -29,29 +32,11 @@ export default {
   },
   computed: {
     chartData() {
-      const keys = Object.keys(
-        Object.keys(this.dataset)
-          .flatMap((key) =>
-            this.dataset[key].map(({ transactionDate }) => transactionDate),
-          )
-          .reduce((store, key) => {
-            return { ...store, [key]: 1 };
-          }, {}),
-      ).sort((a, b) => new Date(a) - new Date(b));
+      const keys = this.getSortedUniqueTransactionDates();
 
-      const groupedDataset = Object.keys(this.dataset).reduce(
-        (store, key) => ({
-          ...store,
-          [key]: this.dataset[key].reduce(
-            (specificStore, { transactionDate, amount }) => ({
-              ...specificStore,
-              [transactionDate]: (specificStore[transactionDate] || 0) + amount,
-            }),
-            {},
-          ),
-        }),
-        {},
-      );
+      const groupedDataset =
+        this.calculateTotalAmountByTransactionDateForDataset();
+
       const colors = generateColors(Object.keys(this.dataset).length);
 
       return {
@@ -67,6 +52,25 @@ export default {
           pointHoverBackgroundColor: "#fff",
         })),
       };
+    },
+  },
+  methods: {
+    getSortedUniqueTransactionDates() {
+      const transactionDates = Object.keys(this.dataset).flatMap((key) =>
+        this.dataset[key].map(({ transactionDate }) => transactionDate),
+      );
+      return [...new Set(transactionDates)].sort(
+        (a, b) => new Date(a) - new Date(b),
+      );
+    },
+    calculateTotalAmountByTransactionDateForDataset() {
+      return Object.keys(this.dataset).reduce(
+        (store, key) => ({
+          ...store,
+          [key]: calculateTotalAmountByTransactionDate(this.dataset[key]),
+        }),
+        {},
+      );
     },
   },
 };
