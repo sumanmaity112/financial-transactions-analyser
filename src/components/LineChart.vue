@@ -24,8 +24,10 @@ export default {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        x: {
-          type: "time",
+        plugins: {
+          tooltip: {
+            filter: ({ raw }) => !!raw,
+          },
         },
       },
     };
@@ -44,6 +46,7 @@ export default {
         datasets: Object.keys(this.dataset).map((label, index) => ({
           label,
           data: keys.map((key) => groupedDataset[label][key] || 0),
+          pointRadius: ({ raw }) => (raw ? 3 : 0),
           fill: false,
           borderColor: colors[index],
           pointBackgroundColor: colors[index],
