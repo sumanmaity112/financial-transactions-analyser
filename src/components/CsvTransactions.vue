@@ -4,7 +4,7 @@
       Sample CSV data can be found
       <a
         class="text-decoration-none text-primary font-weight-medium d-inline-flex align-center"
-        href="https://github.com/sumanmaity112/financial-transactions-analyser?tab=readme-ov-file#csv-format"
+        href="https://github.com/sumanmaity112/finanza?tab=readme-ov-file#csv-format"
         target="_blank"
         >here</a
       >

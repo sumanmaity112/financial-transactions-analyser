@@ -1,11 +1,7 @@
 <template>
   <v-app>
     <v-main>
-      <v-container
-        id="financial-transaction-analyzer-container"
-        class="ma-0 pa-0"
-        fluid
-      >
+      <v-container id="finanza-container" class="ma-0 pa-0" fluid>
         <Home />
       </v-container>
     </v-main>

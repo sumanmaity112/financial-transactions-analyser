@@ -1,5 +1,5 @@
 {
-  "name": "financial-transactions-analyser",
+  "name": "finanza",
   "version": "1.0.0",
   "description": "Analyze CSV financial transactions (ex - bank transactions) with charts",
   "main": "src/main.js",
@@ -37,14 +37,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sumanmaity112/financial-transactions-analyser.git"
+    "url": "git+https://github.com/sumanmaity112/finanza.git"
   },
   "author": "Suman Maity",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/sumanmaity112/financial-transactions-analyser/issues"
+    "url": "https://github.com/sumanmaity112/finanza/issues"
   },
-  "homepage": "https://github.com/sumanmaity112/financial-transactions-analyser#readme",
+  "homepage": "https://github.com/sumanmaity112/finanza#readme",
   "eslintConfig": {
     "root": true,
     "env": {

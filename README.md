@@ -1,11 +1,11 @@
-# Financial Transactions Analyser
+# Finanza
 
 ---
 
 Utilise charts to analyse CSV financial transactions, such as bank transactions.
 This uses browser history to communicate data between pages, but it doesn't exchange any information with third parties.
 
-<img src="https://github.com/sumanmaity112/financial-transactions-analyser/blob/main/screenshots/sample.gif" height="500" alt="financial-transactions-analyser">
+<img src="https://github.com/sumanmaity112/finanza/blob/main/screenshots/sample.gif" height="500" alt="finanza">
 
 ## Features
 
@@ -14,7 +14,7 @@ This uses browser history to communicate data between pages, but it doesn't exch
 
 ## Demo
 
-This application can be accessed [here](https://sumanmaity112.github.io/financial-transactions-analyser/#/).
+This application can be accessed [here](https://sumanmaity112.github.io/finanza/#/).
 
 ## CSV Format
 
